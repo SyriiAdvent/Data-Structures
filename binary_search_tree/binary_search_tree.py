@@ -1,3 +1,4 @@
+from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -77,35 +78,26 @@ class BSTNode:
         if self.right is not None:
             self.right.for_each(fn)
 
-    # def fn(self, node):
-    #     print(self.value)
-
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    def in_order_print(self, node=None):
-        if self.left:
-            self.left.in_order_print(self.left)
-        elif self.right:
-            self.right.in_order_print(self.right)
-        print(self.value)
+    def in_order_print(self, node):
+        if node.left is not None:
+            self.in_order_print(node.left)
+        print(node.value)
+        if node.right is not None:
+            self.in_order_print(node.right)
 
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node=None):
-        print(self.value)
-        if self.left:
-            print(self.left.value)
-            if self.right:
-                print(self.right.value)
-            self.left.bft_print(self.left)
-
+        pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
-    def dft_print(self, node):
+    def dft_print(self, node=None):
         pass
 
     # Stretch Goals -------------------------
@@ -113,11 +105,19 @@ class BSTNode:
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        print(node.value)
+        if node.left is not None:
+            self.in_order_print(node.left)
+        if node.right is not None:
+            self.in_order_print(node.right)
 
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if node.left is not None:
+            self.in_order_print(node.left)
+        if node.right is not None:
+            self.in_order_print(node.right)
+        print(node.value)
 
 
 my_tree = BSTNode(10) # Main
@@ -137,4 +137,4 @@ my_tree.insert(9) # ??
 
 # my_tree.get_max()
 # my_tree.in_order_print()
-my_tree.bft_print()
+my_tree.in_order_print(my_tree) # ?????? why would you ever call a function like this????
